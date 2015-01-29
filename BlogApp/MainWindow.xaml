@@ -1,0 +1,29 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:BlogApp" mc:Ignorable="d" x:Class="BlogApp.MainWindow"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+	<Window.Resources>
+		<CollectionViewSource x:Key="blogViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Blog}, CreateList=True}"/>
+		<CollectionViewSource x:Key="blogPostsViewSource" Source="{Binding Posts, Source={StaticResource blogViewSource}}"/>
+	</Window.Resources>
+	<Grid DataContext="{StaticResource blogViewSource}">
+		<DataGrid x:Name="blogDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,10,189" RowDetailsVisibilityMode="VisibleWhenSelected">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="blogIdColumn" Binding="{Binding BlogId}" Header="Blog Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="urlColumn" Binding="{Binding Url}" Header="Url" Width="SizeToHeader"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="224,266,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
+		<DataGrid x:Name="postsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource blogPostsViewSource}}" Margin="10,135,10,81" RowDetailsVisibilityMode="VisibleWhenSelected">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="blogIdColumn1" Binding="{Binding BlogId}" Header="Blog Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="contentColumn" Binding="{Binding Content}" Header="Content" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="postIdColumn" Binding="{Binding PostId}" Header="Post Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="SizeToHeader"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</Grid>
+</Window>
