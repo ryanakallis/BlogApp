@@ -10,20 +10,23 @@
 	<Grid DataContext="{StaticResource blogViewSource}">
 		<DataGrid x:Name="blogDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,10,189" RowDetailsVisibilityMode="VisibleWhenSelected">
 			<DataGrid.Columns>
-				<DataGridTextColumn x:Name="blogIdColumn" Binding="{Binding BlogId}" Header="Blog Id" Width="SizeToHeader"/>
-				<DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-				<DataGridTextColumn x:Name="urlColumn" Binding="{Binding Url}" Header="Url" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="blogIdColumn" Binding="{Binding BlogId, Mode=OneWay}" Header="Blog Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name, Mode=TwoWay}" Header="Name" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="urlColumn" Binding="{Binding Url, Mode=TwoWay}" Header="Url" Width="SizeToHeader"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		<Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="224,266,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
 		<DataGrid x:Name="postsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource blogPostsViewSource}}" Margin="10,135,10,81" RowDetailsVisibilityMode="VisibleWhenSelected">
 			<DataGrid.Columns>
-				<DataGridTextColumn x:Name="blogIdColumn1" Binding="{Binding BlogId}" Header="Blog Id" Width="SizeToHeader"/>
-				<DataGridTextColumn x:Name="contentColumn" Binding="{Binding Content}" Header="Content" Width="SizeToHeader"/>
-				<DataGridTextColumn x:Name="postIdColumn" Binding="{Binding PostId}" Header="Post Id" Width="SizeToHeader"/>
-				<DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="blogIdColumn1" Binding="{Binding BlogId,Mode=OneWay}" Header="Blog Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="contentColumn" Binding="{Binding Content, Mode=TwoWay}" Header="Content" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="postIdColumn" Binding="{Binding PostId, Mode=OneWay}" Header="Post Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title, Mode=TwoWay}" Header="Title" Width="SizeToHeader"/>
 			</DataGrid.Columns>
 		</DataGrid>
+		<Button HorizontalAlignment="Left" Margin="53,271,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click">
+			<Button Content="Button"  Width="38"/>
+		</Button>
 
 	</Grid>
 </Window>

@@ -21,6 +21,8 @@ namespace BlogApp
 	public partial class MainWindow : Window
 	{
 		private BlogContext _context = new BlogContext();
+		System.Windows.Data.CollectionViewSource blogViewSource = null;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -29,30 +31,15 @@ namespace BlogApp
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 
-			System.Windows.Data.CollectionViewSource blogViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("blogViewSource")));
-			// Load data by setting the CollectionViewSource.Source property:
-			// blogViewSource.Source = [generic data source]
-
-			_context.Blogs.Load();
-
-
-			blogViewSource.Source = _context.Blogs.Local; 
+			this.setFormState(sender);
 		}
 
 		private void saveButton_Click(object sender, RoutedEventArgs e)
 		{
-			foreach (var post in _context.Posts.Local.ToList())
-			{
-				if (post.Blog == null)
-				{
-					_context.Posts.Remove(post);
-				}
-			}
-
+			
 			_context.SaveChanges();
 			// Refresh the grids so the database generated values show up. 
-			this.blogDataGrid.Items.Refresh();
-			this.postsDataGrid.Items.Refresh();
+			this.setFormState(sender);
 		}
 
 
@@ -60,7 +47,28 @@ namespace BlogApp
 		{
 			base.OnClosing(e);
 			this._context.Dispose();
-		} 
+		}
+
+		private void setFormState(object sender)
+		{
+
+			blogViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("blogViewSource")));
+			// Load data by setting the CollectionViewSource.Source property:
+			// blogViewSource.Source = [generic data source]
+
+			_context.Blogs.Load();
+
+
+			blogViewSource.Source = _context.Blogs.Local;
+
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			
+			_context.Blogs.Local.First<Blog>().Name = "Hello WOrld";
+
+		}
 
 		
 	}

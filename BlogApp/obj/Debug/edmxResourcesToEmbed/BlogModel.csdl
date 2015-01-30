@@ -12,7 +12,7 @@
     <Key>
       <PropertyRef Name="BlogId" />
     </Key>
-    <Property Name="BlogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BlogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
     <Property Name="Name" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
     <Property Name="Url" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Posts" Relationship="BloggingModel.FK_dbo_Posts_dbo_Blogs_BlogId" FromRole="Blogs" ToRole="Posts" />
